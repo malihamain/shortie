@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const ShortUrl = require('./models/shortUrl')
-const shortid = require('shortid')
+const { nanoid } = require('nanoid')
 const app = express()
 
 // In-memory store as fallback
@@ -65,7 +65,7 @@ app.post('/shortUrls', async(req, res) => {
             await ShortUrl.create({ full: fullUrl })
         } else {
             // Use memory store
-            const short = shortid.generate()
+            const short = nanoid(8)
             memoryStore.set(short, {
                 full: fullUrl,
                 short: short,
