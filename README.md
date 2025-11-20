@@ -66,24 +66,38 @@ The app will automatically use an in-memory store if MongoDB is not available. *
 
 #### Deployment Platforms
 
-**Heroku:**
-```bash
-heroku create your-app-name
-heroku config:set MONGODB_URI="your-mongodb-uri"
-git push heroku main
-```
+**🚂 Railway (Recommended - Easiest):**
+1. Go to [railway.app](https://railway.app)
+2. Sign up with GitHub
+3. Click "New Project" → "Deploy from GitHub repo"
+4. Select your `shortie` repository
+5. Add MongoDB:
+   - Click "+ New" → "Database" → "Add MongoDB"
+   - Railway will automatically set `MONGODB_URI`
+6. Your app will auto-deploy! 🎉
 
-**Railway:**
-- Add MongoDB service or set `MONGODB_URI` environment variable
-- Deploy from GitHub
+**🎨 Render (Free Tier Available):**
+1. Go to [render.com](https://render.com)
+2. Sign up with GitHub
+3. Click "New" → "Web Service"
+4. Connect your GitHub repo
+5. Settings:
+   - **Build Command:** `npm install`
+   - **Start Command:** `npm start`
+   - **Environment:** Node
+6. Add Environment Variable:
+   - Key: `MONGODB_URI`
+   - Value: Your MongoDB connection string (use [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) for free cloud DB)
+7. Click "Create Web Service"
 
-**Render:**
-- Set `MONGODB_URI` in environment variables
-- Set build command: `npm install`
-- Set start command: `npm start`
+**☁️ MongoDB Atlas (Free Cloud Database):**
+1. Sign up at [mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas)
+2. Create a free cluster
+3. Get connection string from "Connect" → "Connect your application"
+4. Use this as your `MONGODB_URI` environment variable
 
-**Vercel/Netlify:**
-- These platforms are better for static sites. Consider using a Node.js hosting service instead.
+**⚠️ Note about Netlify/Vercel:**
+These platforms are designed for static sites and serverless functions. For a full Express app like this, use Railway or Render instead.
 
 ## Tech Stack
 
