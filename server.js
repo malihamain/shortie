@@ -37,6 +37,7 @@ const isConnected = () => {
 }
 
 app.set('view engine', 'ejs')
+app.set('views', __dirname + '/views')
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(__dirname + '/public'));
 
@@ -106,7 +107,13 @@ app.get('/:shortUrl', async(req, res) => {
     }
 })
 
-const PORT = process.env.PORT || 4000
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`)
-});
+// Export app for Netlify Functions
+module.exports = app
+
+// Local development
+if (require.main === module) {
+    const PORT = process.env.PORT || 4000
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`)
+    })
+}
