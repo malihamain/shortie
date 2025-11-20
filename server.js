@@ -1,3 +1,6 @@
+// Explicitly require ejs before Express to ensure it's bundled
+require('ejs')
+
 const express = require('express')
 const mongoose = require('mongoose')
 const ShortUrl = require('./models/shortUrl')

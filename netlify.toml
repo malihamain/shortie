@@ -4,8 +4,8 @@
   publish = "."
 
 [functions]
-  node_bundler = "esbuild"
-  included_files = ["views/**", "models/**", "public/**"]
+  node_bundler = "nft"
+  included_files = ["views/**", "models/**", "public/**", "node_modules/ejs/**"]
 
 [build.environment]
   NODE_VERSION = "18"
