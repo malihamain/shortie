@@ -1,18 +1,18 @@
-// Ensure we can find dependencies from root
-const path = require('path')
-const Module = require('module')
-const originalRequire = Module.prototype.require
+const serverless = require('serverless-http')
 
-// Add root node_modules to module path
-const rootPath = path.resolve(__dirname, '../..')
-if (!Module._nodeModulePaths.includes(path.join(rootPath, 'node_modules'))) {
-    Module._nodeModulePaths.unshift(path.join(rootPath, 'node_modules'))
+// Import app from root - Netlify will bundle dependencies
+let app
+try {
+    app = require('../../server')
+} catch (error) {
+    // Fallback: require server directly
+    const path = require('path')
+    const serverPath = path.join(__dirname, '../../server.js')
+    delete require.cache[require.resolve(serverPath)]
+    app = require(serverPath)
 }
 
-const serverless = require('serverless-http')
-const app = require('../../server')
-
 exports.handler = serverless(app, {
-    binary: ['image/*', 'font/*']
+    binary: ['image/*', 'font/*', 'text/css', 'application/javascript']
 })
 

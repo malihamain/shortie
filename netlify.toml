@@ -3,9 +3,12 @@
   functions = "netlify/functions"
   publish = "."
 
+[functions]
+  node_bundler = "esbuild"
+  included_files = ["views/**", "models/**", "public/**"]
+
 [build.environment]
   NODE_VERSION = "18"
-  NPM_FLAGS = "--production=false"
 
 [[redirects]]
   from = "/public/*"
